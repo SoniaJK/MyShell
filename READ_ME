@@ -1,6 +1,13 @@
 Sonia Kanchi
 Arjun Anand
 
+myShell takes up to one argument. 
+When given one argument, it will read commands from the specified file. 
+When given no argument, it will read commands from standard input.
+
+When running in interactive mode, mysh will print a prompt to indicate that it is ready to read input.
+The commands cd, pwd, which, and exit are implemented by mysh itself.
+
 Functions of myShell:
 
 check_exit_status():
@@ -35,6 +42,10 @@ Split line:
 Main Method:
 - handles interactive vs. Batch Mode
 
+Notes:
+- Hidden files: Patterns that begin with an asterisk, such as *.txt, will not match names that begin with a period
+- Pipes and redirection can both override the standard input or output of a subprocess(in the event that both are specified, the redirection takes precedence)
+
 Issues:
 - handling wildcard in the last token of a pathname
 - handling built in commands? (ls, cat, echo,...)
@@ -60,6 +71,23 @@ Testing:
 9) edge case: handle trailing whitespace
   "mysh> ls "
 
+Batch mode with no specified file:
+$ cat myscript.sh | ./mysh
+hello
+$
+
+Interactive mode:
+$ ./mysh
+Welcome to my shell!
+mysh> echo hello
+hello
+mysh> cd subsubdir
+mysh> pwd
+/current/path/subdir/subsubdir
+mysh> cd directory_that_does_not_exist
+cd: No such file or directory
+mysh> cd ../..
+mysh> exit
 
 
 
